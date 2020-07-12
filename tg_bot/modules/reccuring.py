@@ -44,7 +44,9 @@ def r2 (bot: Bot, update: Update):
 def r3 (bot: Bot, update: Update):
     time = 10000
     while True:
-        bot.send_message(-1001187701589, "If you've noticed someone is breaking the rules repeatedly: Reply with '!report <reason>' or '@admin <reason>' to a message sent by that individual and s/he will be warned (6 reports needed to a message for the warn to be issued) Members will be banned permanently after two warns. (Please do not abuse the report system, or you might be the one who gets banned :)")
+        bot.send_message(-1001187701589, "If you've noticed someone is breaking the rules repeatedly: Reply with '!report <reason>' or '@admin <reason>' to a message sent by that individual and s/he will be warned (6 reports needed to a message for the warn to be issued) \
+                                        \n\
+                                        \nMembers will be banned permanently after two warns. (Please do not abuse the report system, or you might be the one who gets banned :)")
         sleep(time)
 
 #nem_reccuring
