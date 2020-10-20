@@ -21,9 +21,6 @@ def r1 (bot: Bot, update: Update):
         bot.send_message(-1001123984838, 'Dear Pundians, with the recent release of the Function X test-net, numerous scams have started to appear. Beware that the FX coin in the current state is purely for testing purposes and has no value assigned to it. \
                                         \n\
                                         \nDo not try to send FX tokens from an ERC-20 (ethereum) address to a FX test-net address cause you will risk losing your tokens.')
-        bot.send_message(-1001123984838, 'Let the Function X development team hear your voice, know your feedback and suggestions on the test-net. We are eager to learn and improve.\
-                                        \n\
-                                        \nhttps://forms.gle/chCg27wQVD1fGXz36')
         sleep(time)
 
 #functionx_reccuring
@@ -34,9 +31,6 @@ def r2 (bot: Bot, update: Update):
         bot.send_message(-1001272071252, 'Dear Pundians, with the recent release of the Function X test-net, numerous scams have started to appear. Beware that the FX coin in the current state is purely for testing purposes and has no value assigned to it. \
                                         \n\
                                         \nDo not try to send FX tokens from an ERC-20 (ethereum) address to a FX test-net address cause you will risk losing your tokens.')
-        bot.send_message(-1001272071252, 'Let the Function X development team hear your voice, know your feedback and suggestions on the test-net. We are eager to learn and improve.\
-                                        \n\
-                                        \nhttps://forms.gle/chCg27wQVD1fGXz36')
         sleep(time)
 
 #gift_reccuring
