@@ -14,60 +14,79 @@ from tg_bot.modules.helper_funcs.filters import CustomFilters
 def decimal_str(x: float, decimals: int = 10) -> str:
     return format(x, f".{decimals}f").lstrip().rstrip('0')
 
+def less_decimals(x):
+    var = str(x)
+    if len(var) > 3:
+        var = var[0 : 5 ]
+    if (var[0]=="-"):
+        pass
+    else:
+        var="+"+var
+    return var
 
-def btcnpxs (): #price in satoshi
-    btc = "https://api.coingecko.com/api/v3/simple/price?ids=pundi-x&vs_currencies=btc"
+def btcnpxs ():
+    btc = "https://api.coingecko.com/api/v3/simple/price?ids=pundi-x&vs_currencies=btc&include_24hr_change=true"
     response=requests.get(btc).json()
-    strip = float(response['pundi-x']['btc'])
-    decimal = decimal_str(strip)
-    return decimal
+    price = float(response['pundi-x']['btc'])
+    change = float(response['pundi-x']['btc_24h_change'])
+    price_dec = decimal_str(price)
+    change_dec = less_decimals(change)
+    ret = "{} BTC        {}% in 24h".format(price_dec, change_dec)
+    return ret
 
-def ethnpxs(): #price in gwei
-    eth = "https://api.coingecko.com/api/v3/simple/price?ids=pundi-x&vs_currencies=eth"
+def ethnpxs():
+    eth = "https://api.coingecko.com/api/v3/simple/price?ids=pundi-x&vs_currencies=eth&include_24hr_change=true"
     response=requests.get(eth).json()
-    strip = float(response['pundi-x']['eth'])
-    decimal = decimal_str(strip)
-    #char = 'e'
-    #mod = 10*float(strip.split(char, 1)[0])
-    #stripped = str(mod)
-    #if len(stripped) > 3:
-        #stripped = stripped[0 : 4 ]
-    return decimal
+    price = float(response['pundi-x']['eth'])
+    change = float(response['pundi-x']['eth_24h_change'])
+    price_dec = decimal_str(price)
+    change_dec = less_decimals(change)
+    ret = "{} ETH      {}% in 24h".format(price_dec, change_dec)
+    return ret
 
 def btcfx ():
-    btc = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=btc"
+    btc = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=btc&include_24hr_change=true"
     response=requests.get(btc).json()
-    strip = float(response['fx-coin']['btc'])
-    decimal = decimal_str(strip)
-    return decimal
+    price = float(response['fx-coin']['btc'])
+    change = float(response['fx-coin']['btc_24h_change'])
+    price_dec = decimal_str(price)
+    change_dec = less_decimals(change)
+    ret = "{} BTC      {}% in 24h".format(price_dec, change_dec)
+    return ret
 
 def ethfx ():
-    eth = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=eth"
+    eth = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=eth&include_24hr_change=true"
     response=requests.get(eth).json()
-    strip = float(response['fx-coin']['eth'])
-    decimal = decimal_str(strip)
-    return decimal
+    price = float(response['fx-coin']['eth'])
+    change = float(response['fx-coin']['eth_24h_change'])
+    price_dec = decimal_str(price)
+    change_dec = less_decimals(change)
+    ret = "{} ETH      {}% in 24h".format(price_dec, change_dec)
+    return ret
 
 def usdfx ():
-    usd = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=usd"
+    usd = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=usd&include_24hr_change=true"
     response=requests.get(usd).json()
-    strip = float(response['fx-coin']['usd'])
-    decimal = decimal_str(strip)
-    return decimal
+    price = float(response['fx-coin']['usd'])
+    change = float(response['fx-coin']['usd_24h_change'])
+    price_dec = decimal_str(price)
+    change_dec = less_decimals(change)
+    ret = "{} USD           {}% in 24h".format(price_dec, change_dec)
+    return ret
 
 def fx(bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     message="The price of 1 FX is:\
-                                \n {} BTC\
-                                \n {} ETH\
-                                \n {} USD".format(btcfx(),ethfx(),usdfx())
+                                \n {} \
+                                \n {} \
+                                \n {} ".format(btcfx(),ethfx(),usdfx())
     bot.send_message(chat_id, message)
 
 def npxs (bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     message="The price of 1 NPXS is:\
-                                \n {} BTC\
-                                \n {} ETH".format(btcnpxs(),ethnpxs())
+                                \n {} \
+                                \n {} ".format(btcnpxs(),ethnpxs())
     bot.send_message(chat_id, message)
 
 __mod_name__ = "Price"
