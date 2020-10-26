@@ -44,6 +44,16 @@ def ethnpxs():
     ret = "{} ETH      {}% in 24h".format(price_dec, change_dec)
     return ret
 
+def usdnpxs():
+    usd = "https://api.coingecko.com/api/v3/simple/price?ids=pundi-x&vs_currencies=usd&include_24hr_change=true"
+    response=requests.get(usd).json()
+    price=float(response['pundi-x']['usd'])
+    change = float(response['pundi-x']['usd_24h_change'])
+    price_dec = decimal_str(price)
+    change_dec = less_decimals(change)
+    ret = "{} USD          {}% in 24h".format(price_dec, change_dec)
+    return ret
+
 def btcfx ():
     btc = "https://api.coingecko.com/api/v3/simple/price?ids=fx-coin&vs_currencies=btc&include_24hr_change=true"
     response=requests.get(btc).json()
@@ -86,7 +96,8 @@ def npxs (bot: Bot, update: Update):
     chat_id = update.effective_chat.id
     message="The price of 1 NPXS is:\
                                 \n {} \
-                                \n {} ".format(btcnpxs(),ethnpxs())
+                                \n {} \
+                                \n {} ".format(btcnpxs(),ethnpxs(),usdnpxs())
     bot.send_message(chat_id, message)
 
 __mod_name__ = "Price"
